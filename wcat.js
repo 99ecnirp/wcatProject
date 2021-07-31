@@ -18,22 +18,9 @@ for(let i = 0; i < inputArr.length; i++){
 
 }
 
-let isBothpresent = optionsArr.includes("-n") && optionsArr.includes("-b");
-let idxOfN, idxOfB;
-
-if(isBothpresent){
-    for(let i = 0; i < optionsArr.length; i++){
-        if(optionsArr[i] == "-n"){
-            idxOfN = i;
-        }
-        if(optionsArr[i] == "-b"){
-            idxOfB = i;
-        }
-    }
-}
 
 for( let i = 0; i < fileArr.length; i++){
-            let ifPresent = fs.existsSync(fileArr[i]);
+    let ifPresent = fs.existsSync(fileArr[i]);
     if( ifPresent == false){
         console.log("File doesn't exist");
         return;
@@ -58,47 +45,91 @@ if(isSpresent){
         }
     }
     
-let tempArr =[];
-for(let i = 0; i < contentArr.length; i++){
+    let tempArr =[];
+    for(let i = 0; i < contentArr.length; i++){
         if(contentArr[i] != null){
             tempArr.push(contentArr[i]);
         }
-}
- contentArr = tempArr;
-    
-}
-
-
-
-if(idxOfN < idxOfB){
-    let isNpresent  = optionsArr.includes("-n");
-    
-    if(isNpresent){
-        for(let i = 0;i<contentArr.length;i++){
-            contentArr[i] = `${i+1} ${contentArr[i]}`;
-        }
-        
     }
+    contentArr = tempArr;
+    
 }
 
+let isBothpresent = optionsArr.includes("-n") && optionsArr.includes("-b");
+let idxOfN, idxOfB;
 
-if(idxOfB < idxOfN){
-
-    let isBpresent  = optionsArr.includes("-b");
-    if(isBpresent == true){
-        
-        
-        let counter = 1;
-        for(let i = 0;i<contentArr.length;i++){
-            if(contentArr[i] != ""){
-                contentArr[i] = `${counter} ${contentArr[i]}`;
-                counter++;
+if(isBothpresent){
+    for(let i = 0; i < optionsArr.length; i++){
+        if(optionsArr[i] == "-n"){
+            idxOfN = i;
+        }
+        if(optionsArr[i] == "-b"){
+            idxOfB = i;
+        }
+    }
+    if(idxOfN<idxOfB){
+        let isNpresent  = optionsArr.includes("-n");
+        if(isNpresent == true){
+            for(let i = 0;i<contentArr.length;i++){
+                contentArr[i] = `${i+1} ${contentArr[i]}`;
             }
         }
-        
-        
     }
+    
+    if(idxOfB<idxOfN) {
+        let isBpresent  = optionsArr.includes("-b");
+        if(isBpresent == true){
+            let counter = 1;
+            for(let i = 0;i<contentArr.length;i++){
+                if(contentArr[i] != ""){
+                    contentArr[i] = `${counter} ${contentArr[i]}`;
+                    counter++;
+                }
+            }
+        }
+    }
+}else{
+    
+        let isNpresent  = optionsArr.includes("-n");
+        if(isNpresent){
+            for(let i = 0;i<contentArr.length;i++){
+                contentArr[i] = `${i+1} ${contentArr[i]}`;
+            }
+        }
+    
+    
+    
+        let isBpresent  = optionsArr.includes("-b");
+        if(isBpresent){
+            let counter = 1;
+            for(let i = 0;i<contentArr.length;i++){
+                if(contentArr[i] != ""){
+                    contentArr[i] = `${counter} ${contentArr[i]}`;
+                    counter++;
+                }
+            }
+        }
+    
 }
 
+
 console.log(contentArr.join("\n"));
+
+
+//"C:\Users\Prince\Documents\PP Web Development\WCAT\file1.txt" "C:\Users\Prince\Documents\PP Web Development\WCAT\file2.txt"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
